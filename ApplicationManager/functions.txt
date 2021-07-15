@@ -1,0 +1,8 @@
+cls,CLS|cls#0
+exit,Exit|exit#0
+help,Help|help#0
+cmd,CMD|cmd#1
+powershell,POWERSHELL,PowerShell,Powershell,ps,PS|powershell#1
+explorer,Explorer,ii .,II .,Invoke-Item .,invoke-item .|explorer#1
+edge,Edge,msedge,msEdge|C:/Program" "Files" "(x86)/Microsoft/Edge/Application/msedge.exe#1
+chrome,Chrome|C:/Program" "Files" "(x86)/Google/Chrome/Application/chrome.exe#1
