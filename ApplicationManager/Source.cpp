@@ -10,16 +10,6 @@
 
 using namespace std;
 
-struct AppSet
-{
-	vector<App> apps;
-	string name;
-	void open()
-	{
-
-	}
-};
-
 int main()
 {
 	//vector<APP> apps;
@@ -39,6 +29,7 @@ int main()
 	string input = "";
 	while (input != "exit")
 	{
+		cout << "AppManager> ";
 		getline(cin, input);
 		hndl.parse(input);
 	}

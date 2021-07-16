@@ -138,6 +138,7 @@ void App::operator~()
 {
 	for (size_t i = 0; i < keywords.size(); i++)
 		cout << keywords[i] << ", ";
+	cout << "\b\b ";
 	cout << "| " << path << " # " << isProgram << '\n';
 }
 

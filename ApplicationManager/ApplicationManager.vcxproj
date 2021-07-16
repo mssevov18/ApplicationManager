@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AppHandler.cpp" />
+    <ClCompile Include="Pack.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="AppHandler.h" />
+    <ClInclude Include="Pack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
