@@ -7,6 +7,7 @@ class Pack
 public:
 	Pack();
 	Pack(std::string input);
+	Pack(std::string input, Pack oldPack);
 
 private:
 	std::vector<std::string> appKeys;
@@ -14,12 +15,11 @@ private:
 
 public:
 	size_t size();
-	void remove(size_t index);
-	void list();
 	std::string getName();
+	std::vector<std::string> getKeys();
 	
 
-	void operator() (std::string input);
+	//void operator() (std::string input);
 	void operator~ ();
 	std::string operator[] (size_t index);
 };

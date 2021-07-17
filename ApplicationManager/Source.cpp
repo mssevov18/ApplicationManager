@@ -23,6 +23,7 @@ bool hasLeadingSpaces(std::string in)
 
 int main()
 {
+	DEFCLRB(;)
 	AppHandler hndl;
 	std::string input = "";
 	while (input != "exit")

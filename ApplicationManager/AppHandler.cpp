@@ -87,12 +87,12 @@ AppHandler::AppHandler()
 	hText.push_back(helpText(
 "list",
 "Shows all available apps/packs.",
-"list [app/pack]"));
+"list \"app/pack\""));
 	hText.push_back(helpText(
 "add",
 "Add a new app/pack.",
-"add \"keyword1,keyword2,keyword3|path/command[#1/0(isProgram)]\"\n\
-add \"packName|keyword1,keyword2,keyword3\""));
+"add \"app\" \"keyword1,keyword2,keyword3|path/command[#1/0(isProgram)]\"\n\
+	add \"pack\" \"packName|keyword1,keyword2,keyword3\""));
 	// add app kw1,kw2|path_cmd[#1_0]
 	// add pack name|kw1,kw2
 	hText.push_back(helpText(
@@ -119,6 +119,10 @@ add \"packName|keyword1,keyword2,keyword3\""));
 "exit",
 "Exit from the program.",
 "exit"));
+	hText.push_back(helpText(
+"cls",
+"Clears the screen.",
+"cls"));
 
 }
 
@@ -127,10 +131,10 @@ void AppHandler::parse(string input, bool comment)
 	cout << '\n';
 	for (size_t i = 0; i < apps.size(); i++)
 		for (size_t j = 0; j < apps[i].size(); j++)
-			DEFCLRB(CASEr(input, apps[i][j], !apps[i]; if (comment) cout << "Successfully " << (apps[i].getType() ? "started " : "ran ") << apps[i].getPath() << "\n\n";))
+			CASEr(input, apps[i][j], !apps[i]; if (comment) cout << "Successfully " << (apps[i].getType() ? "started " : "ran ") << apps[i].getPath() << "\n\n";)
 	for (size_t i = 0; i < packs.size(); i++)
 		for (size_t j = 0; j < packs[i].size(); j++)
-			DEFCLRB(CASEr(input, packs[i].getName(), packOpen(packs[i])))
+			CASEr(input, packs[i].getName(), packOpen(packs[i]))
 	CASEr(getFirstWord(input), "help",   this->Help  (getCommand(input, "help"  )); cout << '\n';)
 	CASEr(getFirstWord(input), "list",   this->List  (getCommand(input, "list"  )); cout << '\n';)
 	CASEr(getFirstWord(input), "add",    this->Add   (getCommand(input, "add"   )); cout << '\n';)
@@ -139,10 +143,10 @@ void AppHandler::parse(string input, bool comment)
 	CASEr(getFirstWord(input), "save",   this->Save  (getCommand(input, "save"  )); cout << '\n';)
 	CASEr(getFirstWord(input), "load",   this->Load  (getCommand(input, "load"  )); cout << '\n';)
 	CASEr(getFirstWord(input), "file",   this->File  (getCommand(input, "file"  )); cout << '\n';)
-	CASEr(getFirstWord(input), "exit", DEFCLRB(cout << "\n\nBye~\n\n"; Sleep(500); exit(0)))
+	CASEr(getFirstWord(input), "cls",    system("cls");)
+	CASEr(getFirstWord(input), "exit", DEFCLRB(cout << "\n\nBye~\n\n"; Sleep(250); exit(0)))
 	//DEFAULT(cout << "Error! " << input << " is not a valid function\n")
 	DEFAULT(error::trw(4, input + " is not a valid function", "", input))
-	cout << '\n';
 }
 
 //DWORD sleeplen = 50;
@@ -209,7 +213,6 @@ void AppHandler::Help(string input)
 			if (!temp)
 				error::trw(2, "Command has no help text!", "help", input);
 		}
-		cout << '\n';
 	)
 }
 
@@ -261,15 +264,6 @@ void AppHandler::Add(string input)
 		error::trw(2, "Command has no such specifier", "add", "add " + input);
 }
 
-//	######## ########### ###     ###
-//	######## ###########  ###   ###
-//	###	         ###	   ### ###
-//	#######      ###	    #####
-//	#######      ###	    #####
-//	###	         ###	   ### ###
-//	###	     ###########  ###   ###
-//  ###	     ########### ###     ###  the edit function
-
 void AppHandler::Edit(string input)
 {
 	if (getFirstWord(input) == "app")
@@ -281,7 +275,7 @@ void AppHandler::Edit(string input)
 		if (position == string::npos)
 			error::trw(2, "Keyboard position out of range.\nKeyword could not be found.\nKeyword is invalid or there is no such app", "edit", "edit app " + input);
 		App oldApp = this->apps[position];
-		this->apps[position] = App(newApp);
+		this->apps[position] = App(getCommand(newApp, getFirstWord(newApp)), oldApp);
 			cout << "Edited app.\nFrom -  ";
 			~oldApp;
 			cout << "To -  ";
@@ -296,8 +290,7 @@ void AppHandler::Edit(string input)
 		if (position == string::npos)
 			error::trw(2, "Keyboard position out of range.\nKeyword could not be found.\nKeyword is invalid or there is no such pack", "edit", "edit pack " + input);
 		Pack oldPack = this->packs[position];
-		this->packs[position] = Pack(getCommand(newPack, getFirstWord(newPack)
-		));
+		this->packs[position] = Pack(getCommand(newPack, getFirstWord(newPack)), oldPack);
 		cout << "Edited pack.\nFrom -  ";
 		~oldPack;
 		cout << "To -  ";
