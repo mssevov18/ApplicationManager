@@ -38,5 +38,11 @@
     <ClInclude Include="Pack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ErrorStruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextStyles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

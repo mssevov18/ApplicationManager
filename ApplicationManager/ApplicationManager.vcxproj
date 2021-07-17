@@ -147,6 +147,8 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="AppHandler.h" />
+    <ClInclude Include="TextStyles.h" />
+    <ClInclude Include="ErrorStruct.h" />
     <ClInclude Include="Pack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,4 +1,5 @@
 #include "Pack.h"
+#include "ErrorStruct.h"
 
 using namespace std;
 
@@ -51,11 +52,6 @@ void Pack::list()
 std::string Pack::getName()
 {
 	return name;
-}
-
-void Pack::erase(size_t index)
-{
-	appKeys.erase(appKeys.begin() + index);
 }
 
 void Pack::operator()(string input)

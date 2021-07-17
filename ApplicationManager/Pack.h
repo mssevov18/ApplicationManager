@@ -17,7 +17,6 @@ public:
 	void remove(size_t index);
 	void list();
 	std::string getName();
-	void erase(size_t index);
 	
 
 	void operator() (std::string input);

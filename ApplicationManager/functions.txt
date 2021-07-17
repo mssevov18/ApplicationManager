@@ -1,5 +1,4 @@
 cls,CLS|cls#0
-exit,Exit|exit#0
 cmd,CMD|cmd#1
 powershell,POWERSHELL,PowerShell,Powershell,ps,PS|powershell#1
 explorer,Explorer,ii .,II .,Invoke-Item .,invoke-item .|explorer#1

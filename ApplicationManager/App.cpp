@@ -1,4 +1,5 @@
 #include "App.h"
+#include "ErrorStruct.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ App::App()
 	isProgram = true;
 }
 
-App::App(std::string input, std::string path, bool isProgram, bool ignoreCheck)
+App::App(string input, string path, bool isProgram, bool ignoreCheck)
 {
 	string temp = "";
 	for (size_t i = 0; i < input.length(); i++)
@@ -42,11 +43,11 @@ App::App(std::string input, std::string path, bool isProgram, bool ignoreCheck)
 }
 
 //"trigger1,trigger2|pathOrCommand-isfile(1/0)"
-App::App(std::string input, bool ignoreCheck)
+App::App(string input, bool ignoreCheck)
 {
 	isProgram = true;
 	bool pushToKey = true;
-	std::string temp = "";
+	string temp = "";
 	for (size_t i = 0; i < input.length(); i++)
 	{
 		if (input[i] == ',')
@@ -77,7 +78,7 @@ App::App(std::string input, bool ignoreCheck)
 }
 
 //Change data
-void App::operator() (std::string input, std::string path, bool isProgram, bool ignoreCheck)
+void App::operator() (string input, string path, bool isProgram, bool ignoreCheck)
 {
 	string temp = "";
 	for (size_t i = 0; i < input.length(); i++)
@@ -99,11 +100,11 @@ void App::operator() (std::string input, std::string path, bool isProgram, bool 
 
 //Change data
 //"trigger1,trigger2|pathOrCommand-isfile(1/0)"
-void App::operator() (std::string input, bool ignoreCheck)
+void App::operator() (string input, bool ignoreCheck)
 {
 	isProgram = true;
 	bool pushToKey = true;
-	std::string temp = "";
+	string temp = "";
 	for (size_t i = 0; i < input.length(); i++)
 	{
 		if (input[i] == ',')
@@ -169,6 +170,7 @@ string App::getPath()
 {
 	return this->path;
 }
+
 //Get the application type
 bool App::getType()
 {

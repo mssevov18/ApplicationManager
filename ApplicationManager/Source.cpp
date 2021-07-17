@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <string>
 
@@ -7,30 +6,91 @@
 
 #include "App.h"
 #include "AppHandler.h"
+#include "ErrorStruct.h"
+#include "TextStyles.h"
 
-using namespace std;
+bool hasLeadingSpaces(std::string in)
+{
+	for (size_t i = 0; i < in.length(); i++)
+	{
+		if (in[i] != ' ')
+			return false;
+		else
+			return true;
+	}
+	return in.empty();
+}
 
 int main()
 {
-	//vector<APP> apps;
-	//apps.push_back(APP("cmd|cmd.exe"));
-	//~apps[0];
-	//!apps[0];
-	//save(apps, "test.txt");
 	AppHandler hndl;
-	//hndl.apps.push_back(App("cls,CLS|cls#0"));
-	//hndl.apps.push_back(App("exit,Exit|exit#0"));
-	//hndl.apps.push_back(App("help,Help|help#0"));
-	//hndl.apps.push_back(App("cmd,CMD|cmd#1"));
-	//hndl.apps.push_back(App("powershell,POWERSHELL,PowerShell,Powershell,ps,PS|powershell#1"));
-	//hndl.apps.push_back(App("explorer,Explorer,ii .,II .,Invoke-Item .,invoke-item .|explorer#1"));
-	//hndl.apps.push_back(App("edge,Edge,msedge,msEdge|C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe#1"));
-	//hndl.apps.push_back(App("chrome,Chrome|C:/Program Files (x86)/Google/Chrome/Application/chrome.exe#1"));
-	string input = "";
+	std::string input = "";
 	while (input != "exit")
 	{
-		cout << "AppManager> ";
-		getline(cin, input);
-		hndl.parse(input);
-	}
+		std::cout << "AppManager> ";
+		try
+		{
+			std::getline(std::cin, input);
+			CLROUT(successClr,
+				if (!input.empty())
+					hndl.parse(input);
+			)
+			input.clear();
+		}
+		catch (error err)
+		{
+			CLROUT (errorClr,
+				switch (err.code)
+				{
+				case 0: // No Error, another way to exit a function
+					exit(0);
+					break;
+
+				case 1: // Empty input
+					err.pms("Error: Empty input.");
+					if (!err.src.empty())
+						err.getHelp(hndl.hText);
+					break;
+
+				case 2: // Incorrect command syntax
+					err.pms("Error: Incorrect command syntax.");
+					if (!err.src.empty())
+						err.getHelp(hndl.hText);
+					break;
+
+				case 3: // File could not be oppened
+					err.pms("Error: File could not be oppened.");
+					if (!err.src.empty())
+						err.getHelp(hndl.hText);
+					break;
+
+				case 4: // Invalid function
+					err.pms("Error: Invalid function.");
+					if (!err.src.empty())
+						err.getHelp(hndl.hText);
+					break;
+
+				case 5: // Incomplete command
+					break;
+
+				case 6: // Incomplete command
+					break;
+
+				case 7: // Incomplete command
+					break;
+
+				case 8: // Incomplete command
+					break;
+				default:
+					break;
+				}
+			)
+		}
+		catch (...)
+		{
+			CLROUT(errorClr,
+			std::cerr << "Unspecified Error!";
+			)
+		}
+	} 
 }

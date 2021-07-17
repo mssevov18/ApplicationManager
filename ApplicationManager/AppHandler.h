@@ -1,5 +1,9 @@
 #pragma once
 
+#include <iostream>
+#include <string>
+#include <vector>
+
 #include "App.h"
 #include "Pack.h"
 
@@ -7,87 +11,45 @@ struct helpText
 {
 	helpText();
 	helpText(std::string newKw, std::string newDs, std::string newEh);
+	helpText(std::string input);
 
 	std::string keyword;
 	std::string description;
 	std::string extraHelp;
 };
 
-//packStart|edge,spotify,explorer
-/*open() {
-* for(appkey in appkeys)
-*	parse(appkey);
-* }
-*/
-
-
-struct Package
-{
-	Package()
-	{
-
-	}
-	Package(std::string input)
-	{
-
-	}
-
-	std::vector<std::string> appKeys;
-	std::string name;
-
-	void remove(size_t index)
-	{
-
-	}
-	void list()
-	{
-		for (size_t i = 0; i < appKeys.size(); i++)
-			std::cout << appKeys[i] << ' ';
-		std::cout << '\n';
-	}
-	void operator() (std::string input)
-	{
-
-	}
-	void operator~ ()
-	{
-		std::cout << name << " | ";
-		for (size_t i = 0; i < appKeys.size(); i++)
-			std::cout << appKeys[i] << ", ";
-		std::cout << "\b\b \n";
-	}
-	void operator! ()
-	{
-
-	}
-};
-
-//Todo implement packs!
+//TODO Modify command arguments, so they are used in a cmd/ps style
+//instead of: add pack packName|keyword1,keyword2...
+//         -> add -p packName|keyword1,keyword2...
+//instead of: list pack/app/""
+//         -> list -p/-a/-g
+//instead of: help list
+//         -> list -?
 
 class AppHandler
 {
 public:
 	AppHandler();
 private:
-	std::vector<helpText> hText;
 public:
+	std::vector<helpText> hText;
 	std::vector<App> apps;
 	std::vector<Pack> packs;
 
-	void parse(static std::string input);
+	void parse(std::string input, bool comment = true);
 
 	void packOpen(Pack pack);
 
-	size_t findAppPosByKeyword(static std::string keyword);
-	size_t findPackPosByKeyword(static std::string keyword);
+	size_t findAppPosByKeyword(std::string keyword);
+	size_t findPackPosByKeyword(std::string keyword);
 
-	void Help(static std::string input);
-	void List(static std::string input);
-	void Add(static std::string input);
-	void Edit(static std::string input);
-	void Remove(static std::string input);
-	void Save(static std::string input);
-	void Load(static std::string input);
-	void File(static std::string input);
+	void Help(std::string input);
+	void List(std::string input);
+	void Add(std::string input);
+	void Edit(std::string input);
+	void Remove(std::string input);
+	void Save(std::string input);
+	void Load(std::string input);
+	void File(std::string input);
 };
 
