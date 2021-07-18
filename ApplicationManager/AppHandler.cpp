@@ -7,8 +7,8 @@
 
 using namespace std;
 
-#define version    "1.2.1"
-#define lastupdate "18.7.2021 5:510"
+#define version    "1.2.3"
+#define lastupdate "18.7.2021 06:20"
 
 #define CASE(value, trigger, action)  if (value == trigger) { action; }
 #define CASEr(value, trigger, action)  if (value == trigger) { action; return; }
@@ -133,6 +133,44 @@ AppHandler::AppHandler()
 "Clears the screen.",
 "cls"));
 
+	char dec = 'n';
+	CLROUT(listClr,
+	cout << "Load elements? y/n\n";
+	cin >> dec;
+	cout << '\n';
+	if (dec == 'y' or dec == 'Y')
+	{
+		CLROUTD(successClr, listClr, this->Load();)
+	}
+	else
+	{
+		CLROUTD(successClr, listClr, cout << "No elements loaded";)
+	}
+	cout << '\n';
+	cin.ignore(CHAR_MAX, '\n');
+	cin.clear();
+	)
+}
+
+void AppHandler::Destructor()
+{
+	char dec = 'n';
+	CLROUT(listClr,
+		cout << "Save elements? y/n\n";
+	cin >> dec;
+	cout << '\n';
+	if (dec == 'y' or dec == 'Y')
+	{
+		CLROUTD(successClr, listClr, this->Save();)
+	}
+	else
+	{
+		CLROUTD(successClr, listClr, cout << "No elements saved";)
+	}
+	cout << '\n';
+	cin.ignore(CHAR_MAX, '\n');
+	cin.clear();
+	)
 }
 
 void AppHandler::parse(string input, bool comment)
@@ -154,7 +192,7 @@ void AppHandler::parse(string input, bool comment)
 	CASEr(getFirstWord(input), "file",   this->File  (getCommand(input, "file"  )); cout << '\n';)
 	CASEr(getFirstWord(input), "info",   this->Info  ();                            cout << '\n';)
 	CASEr(getFirstWord(input), "cls",    system("cls");)
-	CASEr(getFirstWord(input), "exit", DEFCLRB(cout << "\n\nBye~\n\n"; Sleep(250); exit(0)))
+	CASEr(getFirstWord(input), "exit",   exit(0))
 	//DEFAULT(cout << "Error! " << input << " is not a valid function\n")
 	DEFAULT(error::trw(4, input + " is not a valid function", "", input))
 }
@@ -233,7 +271,9 @@ void AppHandler::List(string input)
 			error::trw(2, "Command has no such specifier!", "list", input);
 		if (input == "app" or input.empty())
 		{
+			CLROUTD(listheadClr, listClr,
 			cout << "Apps [" << apps.size() << "]:\n";
+			)
 			for (size_t i = 0; i < apps.size(); i++)
 				~apps[i];
 		}
@@ -241,7 +281,9 @@ void AppHandler::List(string input)
 			cout << '\n';
 		if (input == "pack" or input.empty())
 		{
+			CLROUTD(listheadClr, listClr,
 			cout << "Packs [" << packs.size() << "]:\n";
+			)
 			for (size_t i = 0; i < packs.size(); i++)
 				~packs[i];
 		}
@@ -420,4 +462,15 @@ void AppHandler::Info()
 		cout << "\nLast update: " << lastupdate;
 		cout << "\nMade by: mssevov18\n";
 	)
+
+// #########  #########
+// #########  #########
+// #########  #########
+// #########  #########
+// 			 
+// #########  #########
+// #########  #########
+// #########  #########
+// #########  #########
+
 }

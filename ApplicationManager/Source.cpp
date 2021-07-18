@@ -10,6 +10,8 @@
 #include "ErrorStruct.h"
 #include "TextStyles.h"
 
+AppHandler hndl;
+
 bool hasLeadingSpaces(std::string in)
 {
 	for (size_t i = 0; i < in.length(); i++)
@@ -25,20 +27,23 @@ bool hasLeadingSpaces(std::string in)
 void exitFunction()
 {
 	DEFCLRB(;)
+	hndl.Destructor();
+	std::cout << "\n\nBye~\n\n"; Sleep(250);
 }
 
 int main()
 {
 	atexit(exitFunction);
 	DEFCLRB(;)
-	AppHandler hndl;
 	std::string input = "";
 	while (input != "exit")
 	{
 		std::cout << "AppManager> ";
 		try
 		{
-			std::getline(std::cin, input);
+			CLROUT(textClr,
+				std::getline(std::cin, input);
+			)
 			CLROUT(successClr,
 				if (!input.empty())
 					hndl.parse(input);
@@ -100,5 +105,6 @@ int main()
 			std::cerr << "Unspecified Error!";
 			)
 		}
-	} 
+	}
+	return 0;
 }

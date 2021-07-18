@@ -30,6 +30,8 @@ class AppHandler
 {
 public:
 	AppHandler();
+	void Destructor();
+
 private:
 public:
 	std::vector<helpText> hText;
@@ -48,8 +50,8 @@ public:
 	void Add   (std::string input);
 	void Edit  (std::string input);
 	void Remove(std::string input);
-	void Save  (std::string input);
-	void Load  (std::string input);
+	void Save  (std::string input = "");
+	void Load  (std::string input = "");
 	void File  (std::string input);
 	void Info  ();
 };
