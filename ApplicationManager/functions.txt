@@ -2,4 +2,50 @@ cmd,CMD|cmd#1
 powershell,POWERSHELL,PowerShell,Powershell,ps,PS|powershell#1
 explorer,Explorer,ii-.,II-.,Invoke-Item-.,invoke-item-.|explorer#1
 edge,Edge,msedge,msEdge|C:/Program" "Files" "(x86)/Microsoft/Edge/Application/msedge.exe#1
+messenger|D:\Apps\Messenger.lnk#1
+cmd,commandprompt|cmd#1
+powershell,ps|powershell#1
+explorer,ii-.|explorer#1
+edge,msedge|C:/Program" "Files" "(x86)/Microsoft/Edge/Application/msedge.exe#1
+chrome|C:/Program" "Files" "(x86)/Google/Chrome/Application/chrome.exe#1
+spotify|C:/Users/acerpc/AppData/Roaming/Spotify/Spotify.exe#1
+notepad,ntp,pad|notepad#1
+clrs,colours,colors|D:\Useful" "scripts\colors.exe#1
+SortDownloads,sortdownloads|D:\Useful" "scripts\SortDownloads.bat#1
+speechtest,SpeechTest|D:\Useful" "scripts\speechtest.vbs#1
+discord,Discord|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Discord" "Inc\Discord.lnk#1
+arduino|C:\Program" "Files" "(x86)\Arduino\arduino.exe#1
+battle.net,battlenet|D:\Games\Game" "Files\Battle.net\Battle.net" "Launcher.exe#1
+charmap,charactermap|C:\WINDOWS\system32\charmap.exe#1
+calc,calculator|C:\WINDOWS\system32\calc.exe#1
+controlpanel,ControlPanel,cpanel,ctrlpanel|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\System" "Tools\Control" "Panel.lnk#1
+epicgameslauncher,epicgames|D:\Games\Game" "Files\Epic" "Games\Launcher\Portal\Binaries\Win32\EpicGamesLauncher.exe#1
+internetexplorer,ie,iexplore|C:\Program" "Files\Internet" "Explorer\iexplore.exe#1
+krita|C:\Program" "Files\Krita" "(x64)\bin\krita.exe#1
+msmaths,msMaths|D:\Apps\Files\Windows" "Math\MathApp.exe#1
+msteams|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Microsoft" "Teams.lnk#1
+minecraft,mc|C:\Program" "Files" "(x86)\Minecraft" "Launcher\MinecraftLauncher.exe#1
+obs|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\OBS" "Studio\OBS" "Studio" "(64bit).lnk#1
+virtualbox,vmbox|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Oracle" "VM" "VirtualBox\Oracle" "VM" "VirtualBox/lnk#1
+paint|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Accessories\Paint.lnk#1
+bin,trash,junk|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Recycle" "Bin.lnk#1
+c,C|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Cow.lnk#1
+d,D|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Big" "D.lnk#1
+zoomit|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\ZoomIt64.lnk#1
+sfxr|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\sfxr.lnk#1
+bfxr|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Bfxr.lnk#1
+rdconnection,remotedesktot|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Accessories\Remote" "Desktop" "Connection.lnk#1
+steam|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Steam\Steam.lnk#1
+taskscheduler|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Administrative" "Tools\Task" "Scheduler.lnk#1
+vs19,vs,visualstudio|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Visual" "Studio" "2019.lnk#1
+vscode,visualstudiocode|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Visual" "Studio" "Code\Visual" "Studio" "Code.lnk#1
+excel,xlsx|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Excel.lnk#1
+word,docx|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Word.lnk#1
+powerpoint,pptx|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\PowerPoint.lnk#1
+ps-ise,powershell-ise|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Windows" "PowerShell\Windows" "PowerShell" "ISE.lnk#1
+terminal,winterminal|D:\Apps\Windows" "Terminal.lnk#1
+downloads|D:\Downloads#1
 ~Packs~
+testldnflkndfblkndfblkndfb|sdfgdfgs,sdfgsdfg,sdfgsdfgsdfg,sdfg
+sss|ass,ff,a
+startup|discord,spotify,explorer,edge,messenger

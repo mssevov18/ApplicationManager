@@ -33,10 +33,13 @@ public:
 	void Destructor();
 
 private:
-public:
-	std::vector<helpText> hText;
+	std::vector<int> aPathWidth;
+	std::vector<int> aKeyWidth;
+	std::vector<int> pNameWidth;
 	std::vector<App> apps;
 	std::vector<Pack> packs;
+public:
+	std::vector<helpText> hText;
 
 	void parse(std::string input, bool comment = true);
 
@@ -47,6 +50,7 @@ public:
 
 	void Help  (std::string input);
 	void List  (std::string input);
+	void List2 (std::string input);
 	void Add   (std::string input);
 	void Edit  (std::string input);
 	void Remove(std::string input);
@@ -54,5 +58,12 @@ public:
 	void Load  (std::string input = "");
 	void File  (std::string input);
 	void Info  ();
+
+	void push_back(App newApp);
+	void push_back(Pack newPack);
+
+private:
+	void updateAppW();
+	void updatePackW();
 };
 

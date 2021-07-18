@@ -7,8 +7,8 @@
 
 using namespace std;
 
-#define version    "1.2.3"
-#define lastupdate "18.7.2021 06:20"
+#define version    "1.2.4"
+#define lastupdate "18.7.2021 22:45"
 
 #define CASE(value, trigger, action)  if (value == trigger) { action; }
 #define CASEr(value, trigger, action)  if (value == trigger) { action; return; }
@@ -275,7 +275,8 @@ void AppHandler::List(string input)
 			cout << "Apps [" << apps.size() << "]:\n";
 			)
 			for (size_t i = 0; i < apps.size(); i++)
-				~apps[i];
+				apps[i](aKeyWidth[i], aPathWidth[i]);
+				//~apps[i];
 		}
 		if (input.empty())
 			cout << '\n';
@@ -285,7 +286,8 @@ void AppHandler::List(string input)
 			cout << "Packs [" << packs.size() << "]:\n";
 			)
 			for (size_t i = 0; i < packs.size(); i++)
-				~packs[i];
+				packs[i](pNameWidth[i]);
+				//~packs[i];
 		}
 	)
 }
@@ -299,7 +301,7 @@ void AppHandler::Add(string input)
 		input = getCommand(input, "app");
 		if (input.empty())
 			error::trw(2, "Command does not take such arguments", "add", "add app " + input);
-		apps.push_back(App(input));
+		push_back(App(input));
 			cout << "Created app:\n\t";
 			~apps[apps.size() - 1];
 	}
@@ -308,7 +310,7 @@ void AppHandler::Add(string input)
 		input = getCommand(input, "pack");
 		if (input.empty())
 			error::trw(2, "Command does not take such arguments", "add", "add pack " + input);
-		packs.push_back(Pack(input));
+		push_back(Pack(input));
 			cout << "Created pack:\n\t";
 			~packs[packs.size() - 1];
 	}
@@ -332,6 +334,7 @@ void AppHandler::Edit(string input)
 			~oldApp;
 			cout << "To -  ";
 			~this->apps[position];
+		updateAppW();
 	}
 	else if (getFirstWord(input) == "pack")
 	{
@@ -347,6 +350,7 @@ void AppHandler::Edit(string input)
 		~oldPack;
 		cout << "To -  ";
 		~this->packs[position];
+		updatePackW();
 	}
 	else
 		error::trw(2, "Command has no such specifier", "edit", "edit " + input);
@@ -363,6 +367,7 @@ void AppHandler::Remove(string input)
 		~this->apps[position];
 		this->apps.erase(this->apps.begin() + position);
 		//this->apps.erase(this->apps.begin() + this->findPosByKeyword(getCommand(input, "remove")));
+		updateAppW();
 	}
 	else if (getFirstWord(input) == "pack")
 	{
@@ -373,6 +378,7 @@ void AppHandler::Remove(string input)
 		~this->packs[position];
 		this->packs.erase(this->packs.begin() + position);
 		//this->apps.erase(this->apps.begin() + this->findPosByKeyword(getCommand(input, "remove")));
+		updatePackW();
 	}
 	else
 		error::trw(2, "Command has no such specifier", "remove", "remove " + input);
@@ -436,9 +442,9 @@ void AppHandler::Load(string input)
 			}
 
 			if (readApps)
-				apps.push_back(App(line, true));
+				push_back(App(line, true));
 			else
-				packs.push_back(Pack(line));
+				push_back(Pack(line));
 		}
 		file.close();
 		cout << "Successfully loaded " << apps.size() << " Apps and " << packs.size() << " Packs from " << input << "!\n";
@@ -474,3 +480,120 @@ void AppHandler::Info()
 // #########  #########
 
 }
+
+void AppHandler::push_back(App newApp)
+{
+	apps.push_back(newApp);
+	updateAppW();
+}
+
+void AppHandler::push_back(Pack newPack)
+{
+	packs.push_back(newPack);
+	updatePackW();
+}
+
+//Implement a new print funct for app and pack
+
+void AppHandler::updateAppW()
+{
+	int col1 = 0, col2 = 0;
+	size_t colS1 = 1, colS2 = 1;
+	for (size_t i = 0; i < apps.size(); i++)
+	{
+		col1 = 0;
+		col2 = 0;
+		for (size_t j = 0; j < apps[i].size(); j++)
+			col1 += apps[i][j].length() + 2;
+		col1 -= 2;
+		if (col1 >= colS1)
+			colS1 = col1;
+		col2 = apps[i].getPath().length();
+		if (col2 >= colS2)
+			colS2 = col2;
+	}
+	colS1 += 3;
+	colS2 += 3;
+	size_t keySize = aKeyWidth.size(), pathSize = aPathWidth.size();
+	for (size_t i = 0; i < apps.size(); i++)
+	{
+		col1 = 0;
+		for (size_t j = 0; j < apps[i].size(); j++)
+			col1 += apps[i][j].length() + 2;
+		col1 -= 2;
+		if (i >= keySize)
+			aKeyWidth.push_back(colS1 - col1);
+		else
+			aKeyWidth[i] = colS1 - col1;
+		if (i >= pathSize)
+			aPathWidth.push_back(colS2 - apps[i].getPath().length());
+		else
+			aPathWidth[i] = colS2 - apps[i].getPath().length();
+	}
+}
+
+void AppHandler::updatePackW()
+{
+	int col2 = 0;
+	size_t colS2 = 1;
+	for (size_t i = 0; i < packs.size(); i++)
+	{
+		col2 = packs[i].getName().length();
+		if (col2 >= colS2)
+			colS2 = col2;
+	}
+	colS2 += 3;
+	size_t nameSize = pNameWidth.size();
+	for (size_t i = 0; i < packs.size(); i++)
+	{
+		if (i >= nameSize)
+			pNameWidth.push_back(colS2 - packs[i].getName().length());
+		else
+			pNameWidth[i] = colS2 - packs[i].getName().length();
+	}
+}
+
+//void AppHandler::updateAppW()
+//{
+//	int col1 = 0, col2 = 0;
+//	size_t colS1 = 1, colS2 = 1;
+//	for (size_t i = 0; i < apps.size(); i++)
+//	{
+//		col1 = 0;
+//		col2 = 0;
+//		for (size_t j = 0; j < apps[i].size(); j++)
+//			col1 += apps[i][j].length() + 2;
+//		col1 -= 2;
+//		if (col1 >= colS1)
+//			colS1 = col1;
+//		col2 = apps[i].getPath().length();
+//		if (col2 >= colS2)
+//			colS2 = col2;
+//	}
+//	colS1 += 3;
+//	colS2 += 3;
+//	for (size_t i = 0; i < apps.size(); i++)
+//	{
+//		col1 = 0;
+//		for (size_t j = 0; j < apps[i].size(); j++)
+//			col1 += apps[i][j].length() + 2;
+//		col1 -= 2;
+//		width[0] = colS1 - col1;
+//		width[1] = colS2 - apps[i].getPath().length();
+//	}
+//}
+//
+//void AppHandler::updatePackW()
+//{
+//	int col2 = 0;
+//	size_t colS2 = 1;
+//	for (size_t i = 0; i < packs.size(); i++)
+//	{
+//		col2 = packs[i].getName().length();
+//		if (col2 >= colS2)
+//			colS2 = col2;
+//	}
+//	colS2 += 3;
+//	for (size_t i = 0; i < packs.size(); i++)
+//		width[2] = colS2 - packs[i].getName().length();
+//}

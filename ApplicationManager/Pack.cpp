@@ -1,3 +1,5 @@
+#include <iomanip>
+
 #include "Pack.h"
 #include "ErrorStruct.h"
 
@@ -87,36 +89,21 @@ std::vector<std::string> Pack::getKeys()
 	return appKeys;
 }
 
-//void Pack::operator()(string input)
-//{
-//	bool pushToKey = false;
-//	std::string temp = "";
-//	for (size_t i = 0; i < input.length(); i++)
-//	{
-//		if (input[i] == '|')
-//			pushToKey = true;
-//		else if (input[i] == ',')
-//		{
-//			appKeys.push_back(checkKey(temp));
-//			temp.clear();
-//		}
-//		else
-//		{
-//			if (pushToKey)
-//				temp.push_back(input[i]);
-//			else
-//				this->name.push_back(input[i]);
-//		}
-//	}
-//	appKeys.push_back(temp);
-//}
+void Pack::operator()(int width)
+{
+	cout.fill(' ');
+	cout << name << setw(width) << " | ";
+	for (size_t i = 0; i < appKeys.size(); i++)
+		cout << appKeys[i] << ", ";
+	cout << "\b\b \n";
+}
 
 void Pack::operator~()
 {
-	std::cout << name << " | ";
+	cout << name << " | ";
 	for (size_t i = 0; i < appKeys.size(); i++)
-		std::cout << appKeys[i] << ", ";
-	std::cout << "\b\b \n";
+		cout << appKeys[i] << ", ";
+	cout << "\b\b \n";
 }
 
 std::string Pack::operator[](size_t index)

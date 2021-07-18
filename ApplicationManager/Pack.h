@@ -19,7 +19,7 @@ public:
 	std::vector<std::string> getKeys();
 	
 
-	//void operator() (std::string input);
+	void operator() (int width = 1);
 	void operator~ ();
 	std::string operator[] (size_t index);
 };
