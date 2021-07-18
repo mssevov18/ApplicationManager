@@ -7,6 +7,9 @@
 
 using namespace std;
 
+#define version    "1.2.1"
+#define lastupdate "18.7.2021 5:510"
+
 #define CASE(value, trigger, action)  if (value == trigger) { action; }
 #define CASEr(value, trigger, action)  if (value == trigger) { action; return; }
 #define CASEb(value, trigger, action)  if (value == trigger) { action; break; }
@@ -85,6 +88,10 @@ AppHandler::AppHandler()
 "Shows all system commands. Write another keyword after for specific help.",
 "help [\"keyword\"]"));
 	hText.push_back(helpText(
+"info",
+"Shows the project info.",
+"info"));
+	hText.push_back(helpText(
 "list",
 "Shows all available apps/packs.",
 "list \"app/pack\""));
@@ -98,7 +105,9 @@ AppHandler::AppHandler()
 	hText.push_back(helpText(
 "edit",
 "Edit an existing app/pack.",
-"edit \"app/pack\" \"keywordOfAppForEdit newKeyword1,newKeyword2,newKeyword3|newPath/newCommand#1/0(isProgram)\""));
+"edit \"app/pack\" \"keywordOfAppForEdit newKeyword1,newKeyword2,newKeyword3|newPath/newCommand#1/0(isProgram)\"\n\
+		Enter \'*\' to load the previous data, can be put at the end of a section to add more data\n\
+		example: edit app key key1,*|*"));
 	hText.push_back(helpText(
 "remove",
 "Remove an app/pack from the list.",
@@ -143,6 +152,7 @@ void AppHandler::parse(string input, bool comment)
 	CASEr(getFirstWord(input), "save",   this->Save  (getCommand(input, "save"  )); cout << '\n';)
 	CASEr(getFirstWord(input), "load",   this->Load  (getCommand(input, "load"  )); cout << '\n';)
 	CASEr(getFirstWord(input), "file",   this->File  (getCommand(input, "file"  )); cout << '\n';)
+	CASEr(getFirstWord(input), "info",   this->Info  ();                            cout << '\n';)
 	CASEr(getFirstWord(input), "cls",    system("cls");)
 	CASEr(getFirstWord(input), "exit", DEFCLRB(cout << "\n\nBye~\n\n"; Sleep(250); exit(0)))
 	//DEFAULT(cout << "Error! " << input << " is not a valid function\n")
@@ -401,4 +411,13 @@ void AppHandler::File(string input)
 		system(string("start functions.txt").c_str());
 	else
 		system(string("start " + input).c_str());
+}
+
+void AppHandler::Info()
+{
+	CLROUT(CLR(6),
+		cout << "Version: " << version;
+		cout << "\nLast update: " << lastupdate;
+		cout << "\nMade by: mssevov18\n";
+	)
 }

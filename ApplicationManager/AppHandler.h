@@ -43,13 +43,14 @@ public:
 	size_t findAppPosByKeyword(std::string keyword);
 	size_t findPackPosByKeyword(std::string keyword);
 
-	void Help(std::string input);
-	void List(std::string input);
-	void Add(std::string input);
-	void Edit(std::string input);
+	void Help  (std::string input);
+	void List  (std::string input);
+	void Add   (std::string input);
+	void Edit  (std::string input);
 	void Remove(std::string input);
-	void Save(std::string input);
-	void Load(std::string input);
-	void File(std::string input);
+	void Save  (std::string input);
+	void Load  (std::string input);
+	void File  (std::string input);
+	void Info  ();
 };
 

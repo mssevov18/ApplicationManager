@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdlib>
 
 #include "windows.h"
 
@@ -21,8 +22,14 @@ bool hasLeadingSpaces(std::string in)
 	return in.empty();
 }
 
+void exitFunction()
+{
+	DEFCLRB(;)
+}
+
 int main()
 {
+	atexit(exitFunction);
 	DEFCLRB(;)
 	AppHandler hndl;
 	std::string input = "";

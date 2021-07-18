@@ -18,7 +18,8 @@ Pack::Pack(string input)
 			pushToKey = true;
 		else if (input[i] == ',')
 		{
-			appKeys.push_back(checkKey(temp));
+			if (!temp.empty())
+				appKeys.push_back(checkKey(temp));
 			temp.clear();
 		}
 		else
@@ -29,7 +30,8 @@ Pack::Pack(string input)
 				this->name.push_back(input[i]);
 		}
 	}
-	appKeys.push_back(temp);
+	if (!temp.empty())
+		appKeys.push_back(temp);
 }
 
 Pack::Pack(string input, Pack oldPack)
@@ -43,7 +45,8 @@ Pack::Pack(string input, Pack oldPack)
 			if (pushToKey)
 			{
 				skipLast = true;
-				this->appKeys = oldPack.getKeys();
+				for (size_t i = 0; i < oldPack.size(); i++)
+					this->appKeys.push_back(oldPack[i]);
 				break;
 			}
 			else
@@ -53,7 +56,8 @@ Pack::Pack(string input, Pack oldPack)
 			pushToKey = true;
 		else if (input[i] == ',')
 		{
-			appKeys.push_back(checkKey(temp));
+			if (!temp.empty())
+				appKeys.push_back(checkKey(temp));
 			temp.clear();
 		}
 		else
@@ -64,7 +68,7 @@ Pack::Pack(string input, Pack oldPack)
 				this->name.push_back(input[i]);
 		}
 	}
-	if (!skipLast)
+	if (!skipLast and !temp.empty())
 		appKeys.push_back(temp);
 }
 

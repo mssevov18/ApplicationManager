@@ -52,13 +52,15 @@ App::App(string input, string path, bool isProgram, bool ignoreCheck)
 	{
 		if (input[i] == ',')
 		{
-			keywords.push_back(checkKey(temp));
+			if (!temp.empty())
+				keywords.push_back(checkKey(temp));
 			temp.clear();
 		}
 		else
 			temp.push_back(input[i]);
 	}
-	keywords.push_back(checkKey(temp));
+	if (!temp.empty())
+		keywords.push_back(checkKey(temp));
 	this->path = path;
 	if (!ignoreCheck)
 		checkPath(this->path);
@@ -75,12 +77,14 @@ App::App(string input, bool ignoreCheck)
 	{
 		if (input[i] == ',')
 		{
-			keywords.push_back(checkKey(temp));
+			if (!temp.empty())
+				keywords.push_back(checkKey(temp));
 			temp.clear();
 		}
 		else if (input[i] == '|')
 		{
-			keywords.push_back(checkKey(temp));
+			if (!temp.empty())
+				keywords.push_back(checkKey(temp));
 			pushToKey = false;
 		}
 		else if (input[i] == '#')
@@ -111,7 +115,8 @@ App::App(std::string input, App oldApp, bool ignoreCheck)
 		if (input[i] == '*')
 		{
 			if (pushToKey)
-				this->keywords = oldApp.getKeys();
+				for (size_t i = 0; i < oldApp.size(); i++)
+					this->keywords.push_back(oldApp[i]);
 			else
 			{
 				this->path = oldApp.getPath();
@@ -120,12 +125,14 @@ App::App(std::string input, App oldApp, bool ignoreCheck)
 		}
 		else if (input[i] == ',')
 		{
-			keywords.push_back(checkKey(temp));
+			if (!temp.empty())
+				keywords.push_back(checkKey(temp));
 			temp.clear();
 		}
 		else if (input[i] == '|')
 		{
-			keywords.push_back(checkKey(temp));
+			if (!temp.empty())
+				keywords.push_back(checkKey(temp));
 			pushToKey = false;
 		}
 		else if (input[i] == '#')
