@@ -10,7 +10,7 @@
 #include "ErrorStruct.h"
 #include "TextStyles.h"
 
-AppHandler hndl;
+AppHandler *hndl;
 
 bool hasLeadingSpaces(std::string in)
 {
@@ -27,28 +27,41 @@ bool hasLeadingSpaces(std::string in)
 void exitFunction()
 {
 	DEFCLRB(;)
-	hndl.Destructor();
+	delete hndl;
 	std::cout << "\n\nBye~\n\n"; Sleep(250);
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	atexit(exitFunction);
 	DEFCLRB(;)
+	hndl = new AppHandler(argc);
 	std::string input = "";
+	int argI = 1;
+
 	while (input != "exit")
 	{
-		std::cout << "AppManager> ";
 		try
 		{
-			CLROUT(textClr,
-				std::getline(std::cin, input);
-			)
-			CLROUT(successClr,
-				if (!input.empty())
-					hndl.parse(input);
-			)
-			input.clear();
+			if (argc > 1 and argc != argI)
+			{
+				CLROUT(successClr,
+					hndl->parse(argv[argI]);
+				)
+				argI++;
+			}
+			else
+			{
+				std::cout << "AppManager> ";
+				CLROUT(textClr,
+					std::getline(std::cin, input);
+				)
+				CLROUT(successClr,
+					if (!input.empty())
+						hndl->parse(input);
+				)
+				input.clear();
+			}
 		}
 		catch (error err)
 		{
@@ -62,25 +75,25 @@ int main()
 				case 1: // Empty input
 					err.pms("Error: Empty input.");
 					if (!err.src.empty())
-						err.getHelp(hndl.hText);
+						err.getHelp(hndl->hText);
 					break;
 
 				case 2: // Incorrect command syntax
 					err.pms("Error: Incorrect command syntax.");
 					if (!err.src.empty())
-						err.getHelp(hndl.hText);
+						err.getHelp(hndl->hText);
 					break;
 
 				case 3: // File could not be oppened
 					err.pms("Error: File could not be oppened.");
 					if (!err.src.empty())
-						err.getHelp(hndl.hText);
+						err.getHelp(hndl->hText);
 					break;
 
 				case 4: // Invalid function
 					err.pms("Error: Invalid function.");
 					if (!err.src.empty())
-						err.getHelp(hndl.hText);
+						err.getHelp(hndl->hText);
 					break;
 
 				case 5: // Incomplete command

@@ -1,7 +1,3 @@
-cmd,CMD|cmd#1
-powershell,POWERSHELL,PowerShell,Powershell,ps,PS|powershell#1
-explorer,Explorer,ii-.,II-.,Invoke-Item-.,invoke-item-.|explorer#1
-edge,Edge,msedge,msEdge|C:/Program" "Files" "(x86)/Microsoft/Edge/Application/msedge.exe#1
 messenger|D:\Apps\Messenger.lnk#1
 cmd,commandprompt|cmd#1
 powershell,ps|powershell#1
@@ -29,8 +25,8 @@ obs|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\OBS" "Studio\OBS" "St
 virtualbox,vmbox|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Oracle" "VM" "VirtualBox\Oracle" "VM" "VirtualBox/lnk#1
 paint|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\Accessories\Paint.lnk#1
 bin,trash,junk|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Recycle" "Bin.lnk#1
-c,C|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Cow.lnk#1
-d,D|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Big" "D.lnk#1
+c,C|C:#1
+d,D|D:#1
 zoomit|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\ZoomIt64.lnk#1
 sfxr|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\sfxr.lnk#1
 bfxr|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Bfxr.lnk#1
@@ -45,7 +41,7 @@ powerpoint,pptx|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\PowerPoin
 ps-ise,powershell-ise|C:\Users\acerpc\AppData\Roaming\Microsoft\Windows\Start" "Menu\Programs\Windows" "PowerShell\Windows" "PowerShell" "ISE.lnk#1
 terminal,winterminal|D:\Apps\Windows" "Terminal.lnk#1
 downloads|D:\Downloads#1
+e,E|E:#1
+hamachi,LogMeIn-Hamachi|C:\ProgramData\Microsoft\Windows\Start" "Menu\Programs\LogMeIn" "Hamachi\LogMeIn" "Hamachi.lnk#1
 ~Packs~
-testldnflkndfblkndfblkndfb|sdfgdfgs,sdfgsdfg,sdfgsdfgsdfg,sdfg
-sss|ass,ff,a
 startup|discord,spotify,explorer,edge,messenger

@@ -26,11 +26,18 @@ struct helpText
 //instead of: help list
 //         -> list -?
 
+
+//TODO
+//Check if add app input has '|' -> err if not
+//
+//Add remove all apps / packs
+
 class AppHandler
 {
 public:
 	AppHandler();
-	void Destructor();
+	AppHandler(int argc = 1);
+	~AppHandler();
 
 private:
 	std::vector<int> aPathWidth;
@@ -50,7 +57,6 @@ public:
 
 	void Help  (std::string input);
 	void List  (std::string input);
-	void List2 (std::string input);
 	void Add   (std::string input);
 	void Edit  (std::string input);
 	void Remove(std::string input);
@@ -63,6 +69,7 @@ public:
 	void push_back(Pack newPack);
 
 private:
+	void generateHelpText();
 	void updateAppW();
 	void updatePackW();
 };

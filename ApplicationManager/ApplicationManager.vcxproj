@@ -141,20 +141,16 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AppHandler.cpp" />
+    <ClCompile Include="ErrorStruct.cpp" />
     <ClCompile Include="Pack.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="AppHandler.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
     <ClInclude Include="TextStyles.h" />
     <ClInclude Include="ErrorStruct.h" />
     <ClInclude Include="Pack.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="ApplicationManager.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico" />

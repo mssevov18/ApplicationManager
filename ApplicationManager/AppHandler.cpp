@@ -1,14 +1,16 @@
 #include <fstream>
 
 #include "stdlib.h"
+#include "conio.h"
 
 #include "AppHandler.h"
 #include "ErrorStruct.h"
+#include "TextStyles.h"
 
 using namespace std;
 
-#define version    "1.2.4"
-#define lastupdate "18.7.2021 22:45"
+#define version    "1.2.6"
+#define lastupdate "24.7.2021 14:30"
 
 #define CASE(value, trigger, action)  if (value == trigger) { action; }
 #define CASEr(value, trigger, action)  if (value == trigger) { action; return; }
@@ -64,79 +66,12 @@ helpText::helpText(std::string input)
 
 AppHandler::AppHandler()
 {
-//	string a =
-//"\n\
-//help   - Shows all system commands\n\
-//list   - Shows all available apps\n\
-//add    - Add a new app\n\
-//    add \"keyword1,keyword2,keyword3|path/command#1/0(isProgram)\"\n\
-//edit   - Edit an app\n\
-//    edit \"keywordOfAppForEdit newKeyword1,newKeyword2,newKeyword3|newPath/newCommand#1/0(isProgram)\" leave a value as * to keep it unchanged\n\
-//remove - Remove the app from the list\n\
-//    remove \"keywordOfAppToRemove\"\n\
-//save   - Save apps to external file\n\
-//    save [\"filepath\"]\n\
-//load   - Load apps from external file\n\
-//    load [\"filepath\"]\n\
-//file   - Open save file\n\
-//    file [\"filepath\"]\n\
-//exit   - Go back\n\
-//";
-
-	hText.push_back(helpText(
-"help",
-"Shows all system commands. Write another keyword after for specific help.",
-"help [\"keyword\"]"));
-	hText.push_back(helpText(
-"info",
-"Shows the project info.",
-"info"));
-	hText.push_back(helpText(
-"list",
-"Shows all available apps/packs.",
-"list \"app/pack\""));
-	hText.push_back(helpText(
-"add",
-"Add a new app/pack.",
-"add \"app\" \"keyword1,keyword2,keyword3|path/command[#1/0(isProgram)]\"\n\
-	add \"pack\" \"packName|keyword1,keyword2,keyword3\""));
-	// add app kw1,kw2|path_cmd[#1_0]
-	// add pack name|kw1,kw2
-	hText.push_back(helpText(
-"edit",
-"Edit an existing app/pack.",
-"edit \"app/pack\" \"keywordOfAppForEdit newKeyword1,newKeyword2,newKeyword3|newPath/newCommand#1/0(isProgram)\"\n\
-		Enter \'*\' to load the previous data, can be put at the end of a section to add more data\n\
-		example: edit app key key1,*|*"));
-	hText.push_back(helpText(
-"remove",
-"Remove an app/pack from the list.",
-"remove \"app/pack\" \"keywordOfItemToRemove\""));
-	hText.push_back(helpText(
-"save",
-"Save apps and packs to external file.",
-"save [\"filepath\"]"));
-	hText.push_back(helpText(
-"load",
-"Load apps and packs from external file.",
-"load [\"filepath\"]"));
-	hText.push_back(helpText(
-"file",
-"Open save file.",
-"file"));
-	hText.push_back(helpText(
-"exit",
-"Exit from the program.",
-"exit"));
-	hText.push_back(helpText(
-"cls",
-"Clears the screen.",
-"cls"));
+	this->generateHelpText();
 
 	char dec = 'n';
 	CLROUT(listClr,
 	cout << "Load elements? y/n\n";
-	cin >> dec;
+	dec = _getch();
 	cout << '\n';
 	if (dec == 'y' or dec == 'Y')
 	{
@@ -147,17 +82,38 @@ AppHandler::AppHandler()
 		CLROUTD(successClr, listClr, cout << "No elements loaded";)
 	}
 	cout << '\n';
-	cin.ignore(CHAR_MAX, '\n');
-	cin.clear();
 	)
 }
 
-void AppHandler::Destructor()
+AppHandler::AppHandler(int argc)
+{
+	this->generateHelpText();
+
+	if (argc > 1)
+		return;
+	char dec = 'n';
+	CLROUT(listClr,
+	cout << "Load elements? y/n\n";
+	dec = _getch();
+	cout << '\n';
+	if (dec == 'y' or dec == 'Y')
+	{
+		CLROUTD(successClr, listClr, this->Load();)
+	}
+	else
+	{
+		CLROUTD(successClr, listClr, cout << "No elements loaded";)
+	}
+	cout << '\n';
+	)
+}
+
+AppHandler::~AppHandler()
 {
 	char dec = 'n';
 	CLROUT(listClr,
 		cout << "Save elements? y/n\n";
-	cin >> dec;
+	dec = _getch();
 	cout << '\n';
 	if (dec == 'y' or dec == 'Y')
 	{
@@ -168,8 +124,6 @@ void AppHandler::Destructor()
 		CLROUTD(successClr, listClr, cout << "No elements saved";)
 	}
 	cout << '\n';
-	cin.ignore(CHAR_MAX, '\n');
-	cin.clear();
 	)
 }
 
@@ -388,6 +342,7 @@ void AppHandler::Save(string input)
 {
 	if (input.empty())
 		input = "functions.txt";
+	checkPath(input);
 	ofstream file;
 	file.open(input, ios::out | ios::trunc);
 	if (file.is_open())
@@ -427,6 +382,7 @@ void AppHandler::Load(string input)
 {
 	if (input.empty())
 		input = "functions.txt";
+	checkPath(input);
 	ifstream file;
 	file.open(input, ios::in);
 	if (file.is_open())
@@ -495,9 +451,62 @@ void AppHandler::push_back(Pack newPack)
 
 //Implement a new print funct for app and pack
 
+void AppHandler::generateHelpText()
+{
+	hText.push_back(helpText(
+		"help",
+		"Shows all system commands. Write another keyword after for specific help.",
+		"help [\"keyword\"]"));
+	hText.push_back(helpText(
+		"info",
+		"Shows the project info.",
+		"info"));
+	hText.push_back(helpText(
+		"list",
+		"Shows all available apps/packs.",
+		"list \"app/pack\""));
+	hText.push_back(helpText(
+		"add",
+		"Add a new app/pack.",
+		"add \"app\" \"keyword1,keyword2,keyword3|path/command[#1/0(isProgram)]\"\n\
+	add \"pack\" \"packName|keyword1,keyword2,keyword3\""));
+	// add app kw1,kw2|path_cmd[#1_0]
+	// add pack name|kw1,kw2
+	hText.push_back(helpText(
+		"edit",
+		"Edit an existing app/pack.",
+		"edit \"app/pack\" \"keywordOfAppForEdit newKeyword1,newKeyword2,newKeyword3|newPath/newCommand#1/0(isProgram)\"\n\
+		Enter \'*\' to load the previous data, can be put at the end of a section to add more data\n\
+		example: edit app key key1,*|*"));
+	hText.push_back(helpText(
+		"remove",
+		"Remove an app/pack from the list.",
+		"remove \"app/pack\" \"keywordOfItemToRemove\""));
+	hText.push_back(helpText(
+		"save",
+		"Save apps and packs to external file.",
+		"save [\"filepath\"]"));
+	hText.push_back(helpText(
+		"load",
+		"Load apps and packs from external file.",
+		"load [\"filepath\"]"));
+	hText.push_back(helpText(
+		"file",
+		"Open save file.",
+		"file"));
+	hText.push_back(helpText(
+		"exit",
+		"Exit from the program.",
+		"exit"));
+	hText.push_back(helpText(
+		"cls",
+		"Clears the screen.",
+		"cls"));
+}
+
 void AppHandler::updateAppW()
 {
-	int col1 = 0, col2 = 0;
+	size_t col1 = 0, col2 = 0;
 	size_t colS1 = 1, colS2 = 1;
 	for (size_t i = 0; i < apps.size(); i++)
 	{
@@ -534,7 +543,7 @@ void AppHandler::updateAppW()
 
 void AppHandler::updatePackW()
 {
-	int col2 = 0;
+	size_t col2 = 0;
 	size_t colS2 = 1;
 	for (size_t i = 0; i < packs.size(); i++)
 	{

@@ -5,41 +5,6 @@
 
 using namespace std;
 
-void checkPath(string& path)
-{
-	size_t start = path.find(' ');
-	if (start == string::npos)
-		return;
-	for (size_t i = start; i < path.length(); i++)
-	{
-		if (path[i] == ' ')
-		{
-			path.insert(path.begin() + i + 1, '\"');
-			path.insert(path.begin() + (i++), '\"');
-			if (path.find(' ') == string::npos)
-				return;
-		}
-	}
-}
-
-string checkKey(string key)
-{
-	string out = key;
-	size_t start = out.find(' ');
-	if (start == string::npos)
-		return out;
-	for (size_t i = start; i < out.length(); i++)
-	{
-		if (out[i] == ' ')
-		{
-			out[i] = '-';
-			if (key.find(' ') == string::npos)
-				return out;
-		}
-	}
-	return out;
-}
-
 App::App()
 {
 	keywords.push_back("cmd");
